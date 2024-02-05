@@ -1,0 +1,82 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Signup</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="signupForm" (ngSubmit)="handleSignup()">
+        <mat-form-field appearance="outline">
+            <mat-label>Enter your Firstname</mat-label>
+            <input
+              matInput
+              type="text"
+              id="firstName"
+              placeholder="John"
+              formControlName="firstName"
+            />
+            @if (signupForm.hasError('firstName')) {
+            <mat-error>{{ signupForm.getError("firstName") }}</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Enter your Lastname</mat-label>
+            <input
+              matInput
+              type="text"
+              id="lastName"
+              placeholder="John"
+              formControlName="lastName"
+            />
+            @if (signupForm.hasError('lastName')) {
+            <mat-error>{{ signupForm.getError("lastName") }}</mat-error>
+            }
+          </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          type="email"
+          id="email"
+          placeholder="your@example.com"
+          formControlName="email"
+        />
+        @if (signupForm.hasError('email')) {
+        <mat-error>{{ signupForm.getError("email") }}</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          id="password"
+          placeholder="your password"
+          formControlName="password"
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+        >
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        @if (signupForm.hasError('password')) {
+        <mat-error>{{ signupForm.getError("password") }}</mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="!signupForm.valid || signupLoading()"
+      >
+        {{ signupLoading() ? "loading" : "Login" }}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
